@@ -1,5 +1,5 @@
 ﻿using Synapse.Api.Plugin;
-using System.Collections.Generic;
+using Synapse.Translation;
 using Synapse.Api;
 
 namespace Example_Plugin
@@ -10,24 +10,22 @@ namespace Example_Plugin
         LoadPriority = 0,
         Name = "ExamplePlugin",
         SynapseMajor = 2,
-        SynapseMinor = 4,
+        SynapseMinor = 7,
         SynapsePatch = 0,
         Version = "2.0.0"
         )]
     public class PluginClass : AbstractPlugin
     {
         [Config(section = "Example Plugin2")]
-        public static PluginConfig Config;
+        public static PluginConfig Config { get; set; }
+
+        [SynapseTranslation]
+        public static new SynapseTranslation<PluginTranslation> Translation { get; set; }
 
         public override void Load()
         {
             SynapseController.Server.Logger.Info("Example Plugin Load");
-            var dict = new Dictionary<string, string>()
-            {
-                {"translation1","Some Translation" }
-            };
-            Translation.CreateTranslations(dict);
-            Logger.Get.Info(this.Translation.GetTranslation("translation1"));
+            Logger.Get.Info(Translation.ActiveTranslation.LoggerMessage);
 
             new EventHandlers();
         }
