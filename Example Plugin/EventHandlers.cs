@@ -21,7 +21,7 @@ namespace Example_Plugin
 
         private void OnJoin(Synapse.Api.Events.SynapseEventArguments.PlayerJoinEventArgs ev)
         {
-            ev.Player.SendConsoleMessage(PluginClass.Config.consoleMessage);
+            ev.Player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.JoinMessage, PluginClass.Config.ConsoleColor);
         }
     }
 }

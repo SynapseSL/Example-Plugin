@@ -4,6 +4,6 @@ namespace Example_Plugin
 {
     public class PluginConfig : IConfigSection
     {
-        public string consoleMessage = "Hello World";
+        public string ConsoleColor { get; set; } = "red";
     }
 }
